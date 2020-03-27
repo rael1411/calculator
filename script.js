@@ -2,7 +2,7 @@ function add(a, b){
     return a + b;
 }
 function subtract(a, b){
-    return a - b;
+    return parseFloat(a - b);
 }
 function multiply(a, b){
     return a * b;
@@ -33,9 +33,9 @@ screenContent.textContent = currentValue;
 function displayNumbers(n){
     //if (writeable){
         if (currentValue == 0){
-            currentValue = parseInt(n.target.id);
+            currentValue = parseFloat(n.target.id);
         } else {
-            currentValue = parseInt(currentValue) * 10 + parseInt(n.target.id);
+            currentValue = parseFloat(currentValue) * 10 + parseFloat(n.target.id);
         }
         screenContent.textContent = currentValue;
     //}
@@ -47,7 +47,7 @@ for (let i = 0, l = btn.length; i < l; i++){
 //this clears the screen
 function clearScreen() {
     currentValue = 0;
-    screenContent.textContent = parseInt(currentValue);
+    screenContent.textContent = parseFloat(currentValue);
 }
 var sign = "empty";
 const ops = document.getElementsByClassName("operator");
@@ -55,13 +55,13 @@ const ops = document.getElementsByClassName("operator");
 for (let i = 0, l = ops.length; i < l; i++){
     ops[i].addEventListener("click", function(e){
         if (temp === 0){
-            temp = parseInt(currentValue);
+            temp = parseFloat(currentValue);
             clearScreen();
             sign = e.target.id;
         }
         else {
-            currentValue = operator(sign, parseInt(temp), parseInt(currentValue));
-            screenContent.textContent = parseInt(currentValue);
+            currentValue = operator(sign, parseFloat(temp), parseFloat(currentValue));
+            screenContent.textContent = parseFloat(currentValue).toFixed(2);
             sign = e.target.id;
             temp = currentValue;
             currentValue = 0;
@@ -79,8 +79,8 @@ clear.addEventListener("click", () => {
 const equal = document.getElementById("equals");
 equal.addEventListener("click", () => {
     if (sign != "empty"){
-        currentValue = operator(sign, parseInt(temp), parseInt(currentValue));
-        screenContent.textContent = parseInt(currentValue);
+        currentValue = operator(sign, parseFloat(temp), parseFloat(currentValue));
+        screenContent.textContent = parseFloat(currentValue).toFixed(2);
         currentValue = 0;
         temp = 0;
         writeable = true;
